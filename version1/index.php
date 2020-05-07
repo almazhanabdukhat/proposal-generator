@@ -652,7 +652,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 //get contact info from email entered by the user
 function getByEmail(string $email)
     { //url to connect to Hubspot api
-      $endpoint = "https://api.hubapi.com/contacts/v1/contact/email/{$email}/profile?hapikey=0a5f993e-44d8-4737-a59b-663fd236ba8d";
+      $api_key="YOUR API KEY";
+      $endpoint = "https://api.hubapi.com/contacts/v1/contact/email/{$email}/profile?hapikey={$api_key}";
       $json_response1 = @file_get_contents($endpoint);
       if($json_response1==FALSE) { //address file contents exception
         return -1;
@@ -683,7 +684,8 @@ function getByEmail(string $email)
        //first get contact info from email entered by the user
         $contactArray=getByEmail($email);
         $contId=$contactArray[2];
-        $endpoint2 = "https://api.hubapi.com/crm-associations/v1/associations/{$contId}/HUBSPOT_DEFINED/4?hapikey=0a5f993e-44d8-4737-a59b-663fd236ba8d";
+        $api_key="YOUR API KEY";
+        $endpoint2 = "https://api.hubapi.com/crm-associations/v1/associations/{$contId}/HUBSPOT_DEFINED/4?hapikey={$api_key}";
         $json_response1 = @file_get_contents($endpoint2); 
         if ($json_response1==FALSE) {    //address file contents exception
           return -1;   //no deal for the contact
@@ -700,8 +702,8 @@ function getByEmail(string $email)
    function getEngInfoFromDealID(string $dealID) {
     
     //https://api.hubapi.com/crm-associations/v1/associations/25/HUBSPOT_DEFINED/15?hapikey=demo
-       
-        $endpoint2 = "https://api.hubapi.com/crm-associations/v1/associations/{$dealID}/HUBSPOT_DEFINED/11?hapikey=0a5f993e-44d8-4737-a59b-663fd236ba8d";
+       $api_key="YOUR API KEY";
+        $endpoint2 = "https://api.hubapi.com/crm-associations/v1/associations/{$dealID}/HUBSPOT_DEFINED/11?hapikey={$api_key}";
         $json_response1 = @file_get_contents($endpoint2);
         if ($json_response1==FALSE) { //address file contents error
           $result = "No engagements associated with the deal"; 
@@ -723,7 +725,8 @@ function getByEmail(string $email)
    //get deal info from deal id 
    function getDealInfoFromDealID(string $dealId) {
      //https://api.hubapi.com/deals/v1/deal/18479339?hapikey=demo
-        $endpoint2 = "https://api.hubapi.com/deals/v1/deal/{$dealId}?hapikey=0a5f993e-44d8-4737-a59b-663fd236ba8d";
+        $api_key="YOUR API KEY";
+        $endpoint2 = "https://api.hubapi.com/deals/v1/deal/{$dealId}?hapikey={$api_key}";
         $json_response1 = @file_get_contents($endpoint2);
         if ($json_response1==FALSE) { //if no deal info, ask user to enter it
           $projAmount = "Enter projected deal amount in USD";
@@ -788,8 +791,8 @@ function getByEmail(string $email)
     
    //get owner info from owner ID
    function getOwnerInfo(string $ownerID) {
-
-        $endpointO = "http://api.hubapi.com/owners/v2/owners/{$ownerID}?hapikey=0a5f993e-44d8-4737-a59b-663fd236ba8d";
+        $api_key="YOUR API KEY";
+        $endpointO = "http://api.hubapi.com/owners/v2/owners/{$ownerID}?hapikey={$api_key}";
         $json_response1 = @file_get_contents($endpointO);
         if ($json_response1==FALSE) { //address file contents exception
           $result="Enter deal owner's first and last name"; //if no owner, ask the user to enter it
@@ -819,7 +822,8 @@ function getByEmail(string $email)
   //get company info from company id
    function getCompanyInfo(string $compID) {
     //https://api.hubapi.com/companies/v2/companies/{$compID}?hapikey
-    $endpointO = "https://api.hubapi.com/companies/v2/companies/{$compID}?hapikey=0a5f993e-44d8-4737-a59b-663fd236ba8d";
+     $api_key="YOUR API KEY";
+    $endpointO = "https://api.hubapi.com/companies/v2/companies/{$compID}?hapikey={$api_key}";
     $json_response1 = @file_get_contents($endpointO);
     if ($json_response1==FALSE) { //address file contents exception
       $result="Enter company name"; //if no company, ask the user to enter it
@@ -840,8 +844,9 @@ function getByEmail(string $email)
    
    //get contacts associated with the deal from deal id
    function getAssocContacts ($dealID){
+     $api_key="YOUR API KEY";
      //https://api.hubapi.com/crm-associations/v1/associations/25/HUBSPOT_DEFINED/15?hapikey=demo
-    $endpointS = "https://api.hubapi.com/crm-associations/v1/associations/{$dealID}/HUBSPOT_DEFINED/3?hapikey=0a5f993e-44d8-4737-a59b-663fd236ba8d";
+    $endpointS = "https://api.hubapi.com/crm-associations/v1/associations/{$dealID}/HUBSPOT_DEFINED/3?hapikey={$api_key}";
     $json_response1 = @file_get_contents($endpointS); //address file contents exception
     if ($json_response1==FALSE) {
       $result="No contacts for this deal"; //if no contacts exist 
@@ -861,7 +866,8 @@ function getByEmail(string $email)
   //get company associated with the contact id
   function getAssocCompany ($cid){
     //https://api.hubapi.com/crm-associations/v1/associations/25/HUBSPOT_DEFINED/15?hapikey=demo
-   $endpointS = "https://api.hubapi.com/crm-associations/v1/associations/{$cid}/HUBSPOT_DEFINED/1?hapikey=0a5f993e-44d8-4737-a59b-663fd236ba8d";
+    $api_key="YOUR API KEY";
+   $endpointS = "https://api.hubapi.com/crm-associations/v1/associations/{$cid}/HUBSPOT_DEFINED/1?hapikey={$api_key}";
    $json_response1 = @file_get_contents($endpointS); //address file contents exception
    if ($json_response1==FALSE) { 
      return -1;     //if no company exists 
@@ -874,7 +880,8 @@ function getByEmail(string $email)
  
   //get eng type-notes from an engagement id (for each deal)
     function getNotes ($eng){
-   $endpointS = "https://api.hubapi.com/engagements/v1/engagements/{$eng}?hapikey=0a5f993e-44d8-4737-a59b-663fd236ba8d";
+    $api_key="YOUR API KEY";
+   $endpointS = "https://api.hubapi.com/engagements/v1/engagements/{$eng}?hapikey={$api_key}";
    $json_response1 = @file_get_contents($endpointS); //address file contents error
    if ($json_response1==FALSE) {
      return -1; //if no notes
@@ -895,9 +902,10 @@ function getByEmail(string $email)
 
   //get contact info from contact id
   function getContInfoFromCID ($CID){
+    $api_key="YOUR API KEY";
   //https://api.hubapi.com/contacts/v1/contact/vid/12627374/profile?hapikey=demo
 
-   $endpointS = "https://api.hubapi.com/contacts/v1/contact/vid/{$CID}/profile?hapikey=0a5f993e-44d8-4737-a59b-663fd236ba8d";
+   $endpointS = "https://api.hubapi.com/contacts/v1/contact/vid/{$CID}/profile?hapikey={$api_key}";
    $json_response1 = @file_get_contents($endpointS);
    if ($json_response1==FALSE) { //address file contents error
      $result="No contacts for this deal";
@@ -945,122 +953,122 @@ function getByEmail(string $email)
       
 
 <br> <br>
-<form action="https://docs.google.com/forms/u/2/d/e/1FAIpQLSdJ8maDPkQNGt2brhTR3ZaQdoHFUONoqOxkygM06gL0Tcqa2A/formResponse" target="_self" method="POST" id="mG61Hd">
+<form action="spreadsheet URL" target="_self" method="POST" id="mG61Hd">
  
   
   <label for="consN" >Consultant name:</label>
-<input autocomplete='off' target="_self" method="POST" class='loginInput' name="entry.224310505" placeholder = "Consultant name" id="consN" type="text" value= "<?php if($valid) echo $userName; else echo "" ?>" maxlength='50' size="25">
+<input autocomplete='off' target="_self" method="POST" class='loginInput' name="" placeholder = "Consultant name" id="consN" type="text" value= "<?php if($valid) echo $userName; else echo "" ?>" maxlength='50' size="25">
 
 
 <label for="clientE" >Client email:</label>
-<input autocomplete='off' target="_self" method="POST" class='loginInput' name="entry.1011831599" placeholder = "Client email" id="clientE" type="text" value= "<?php if($valid) echo $email; else echo "" ?>" maxlength='50' size="25">
+<input autocomplete='off' target="_self" method="POST" class='loginInput' name="" placeholder = "Client email" id="clientE" type="text" value= "<?php if($valid) echo $email; else echo "" ?>" maxlength='50' size="25">
   
 
 <label for="fistN" >Client first name:</label>
-<input autocomplete='off' target="_self" method="POST" class='loginInput' name = "entry.273331075" placeholder = "First name" id="firstN" type="text" value= "<?php if($valid) echo $firstName; else echo "" ?>" maxlength='50' size="25">
+<input autocomplete='off' target="_self" method="POST" class='loginInput' name = "" placeholder = "First name" id="firstN" type="text" value= "<?php if($valid) echo $firstName; else echo "" ?>" maxlength='50' size="25">
   
 <label for="lastN">Client last name:</label>
-<input autocomplete='off' class='loginInput' name="entry.2008305730" placeholder = "Last name" id="lastN" type="text" value= "<?php if($valid) echo $lastName; else echo "" ?>" maxlength='50' size="25">
+<input autocomplete='off' class='loginInput' name="" placeholder = "Last name" id="lastN" type="text" value= "<?php if($valid) echo $lastName; else echo "" ?>" maxlength='50' size="25">
 <label for="numDeals">Number of deals associated with the client:</label>
-<input autocomplete='off' class='loginInput' name="entry.1854771763" placeholder = "Number of associated deals" id="numDeals" type="text" value= "<?php if($valid) echo $numDeals; else echo "" ?>" maxlength='50' size="25">
+<input autocomplete='off' class='loginInput' name="" placeholder = "Number of associated deals" id="numDeals" type="text" value= "<?php if($valid) echo $numDeals; else echo "" ?>" maxlength='50' size="25">
 
 <label for="dealID">Deal ID:</label-->
-<input autocomplete='off' class='loginInput' name="entry.969480558" placeholder = "Deal ID" id="dealID" type="text" value= "<?php if($valid) echo $dealID; else echo "" ?>" maxlength='50' size="25">
+<input autocomplete='off' class='loginInput' name="" placeholder = "Deal ID" id="dealID" type="text" value= "<?php if($valid) echo $dealID; else echo "" ?>" maxlength='50' size="25">
 
 <label for="cients">All clients associated with the deal:</label>
-<input autocomplete='off' class='loginInput' name="entry.138731583" placeholder = "All clients associated with the deal" id="clients" type="text" value= "<?php if($valid) echo $initialsDeal; else echo "" ?>" maxlength='50' size="25">
+<input autocomplete='off' class='loginInput' name="" placeholder = "All clients associated with the deal" id="clients" type="text" value= "<?php if($valid) echo $initialsDeal; else echo "" ?>" maxlength='50' size="25">
 
 <label for="company">Company name:</label>
-<input autocomplete='off' class='loginInput' name="entry.1408470543" placeholder = "Company name" id="company" type="text" value= "<?php if($valid) echo $companyName; else echo "" ?>" maxlength='150' size="25">
+<input autocomplete='off' class='loginInput' name="" placeholder = "Company name" id="company" type="text" value= "<?php if($valid) echo $companyName; else echo "" ?>" maxlength='150' size="25">
 <label for="farmtype">Farm type:</label>
-<input autocomplete='off' class='loginInput' name="entry.2096727090" placeholder = "Farm type" id="farmtype" type="text" value= "<?php if($valid) echo $farm_type; else echo "" ?>" maxlength='150' size="25">
+<input autocomplete='off' class='loginInput' name="" placeholder = "Farm type" id="farmtype" type="text" value= "<?php if($valid) echo $farm_type; else echo "" ?>" maxlength='150' size="25">
 
 <label for="projAm">Projected amount:</label>
-<input autocomplete='off' class='loginInput' name="entry.831098147" placeholder = "Projected deal amount in USD" id="projAm" type="text" value= "<?php if($valid) echo $projAm; else echo "" ?>" maxlength='50' size="25">
+<input autocomplete='off' class='loginInput' name="" placeholder = "Projected deal amount in USD" id="projAm" type="text" value= "<?php if($valid) echo $projAm; else echo "" ?>" maxlength='50' size="25">
 <label for="dealDes">Deal description:</label>
-<input autocomplete='off' class='loginInput' name="entry.2120059079" placeholder = "Deal description" id="dealDes" type="text" value= "<?php if($valid) echo $dealDesc; else echo "" ?>" maxlength='1000' size="25">
+<input autocomplete='off' class='loginInput' name="" placeholder = "Deal description" id="dealDes" type="text" value= "<?php if($valid) echo $dealDesc; else echo "" ?>" maxlength='1000' size="25">
 <label for="dealType">Deal type:</label>
-<input autocomplete='off' class='loginInput' name="entry.273334036" placeholder = "Deal type" id="dealType" type="text" value= "<?php if($valid) echo $dealtype; else echo "" ?>" maxlength='100' size="25">
+<input autocomplete='off' class='loginInput' name="" placeholder = "Deal type" id="dealType" type="text" value= "<?php if($valid) echo $dealtype; else echo "" ?>" maxlength='100' size="25">
 
 
 <label for="dealname">Deal name:</label>
-<input autocomplete='off' class='loginInput' name="entry.713128427"  placeholder = "Deal name" id="dealname" type="text" value= "<?php if($valid) echo $dealname; else echo "" ?>" maxlength='100' size="25">
+<input autocomplete='off' class='loginInput' name=""  placeholder = "Deal name" id="dealname" type="text" value= "<?php if($valid) echo $dealname; else echo "" ?>" maxlength='100' size="25">
 <label for="owner">Deal owner:</label>
-<input autocomplete='off' class='loginInput' name="entry.1175322317" placeholder = "Deal owner" id="owner" type="text" value= "<?php if($valid) echo $ownerInit; else echo "" ?>" maxlength='100' size="25">
+<input autocomplete='off' class='loginInput' name="" placeholder = "Deal owner" id="owner" type="text" value= "<?php if($valid) echo $ownerInit; else echo "" ?>" maxlength='100' size="25">
 <label for="closeDate">Close date:</label>
-<input autocomplete='off' class='loginInput' name="entry.2074707351" placeholder = "Close date" id="closedate" type="text" value= "<?php if($valid) echo $closedate; else echo "" ?>" maxlength='100' size="25">
+<input autocomplete='off' class='loginInput' name="" placeholder = "Close date" id="closedate" type="text" value= "<?php if($valid) echo $closedate; else echo "" ?>" maxlength='100' size="25">
 <label for="assigndate">Assigned date:</label>
-<input autocomplete='off' class='loginInput' name="entry.1983184017" placeholder = "Assigned date" id="assigndate" type="text" value= "<?php if($valid) echo $assigndate; else echo "" ?>" maxlength='100' size="25">
+<input autocomplete='off' class='loginInput' name="" placeholder = "Assigned date" id="assigndate" type="text" value= "<?php if($valid) echo $assigndate; else echo "" ?>" maxlength='100' size="25">
 
 <label for="eduServices">Education services:</label>
-<input autocomplete='off' class='loginInput' name="entry.1796673500"  placeholder = "Education services if selected" id="eduServices" type="text" value= "<?php echo $eduServices; ?>" maxlength='100' size="25">
+<input autocomplete='off' class='loginInput' name=""  placeholder = "Education services if selected" id="eduServices" type="text" value= "<?php echo $eduServices; ?>" maxlength='100' size="25">
 
 <label for="cdServices">Concept development services:</label>
-<input autocomplete='off' class='loginInput' name="entry.1511727332"  placeholder = "Concept development services if selected" id="cdServices" type="text" value= "<?php echo $cdServices; ?>" maxlength='100' size="25">
+<input autocomplete='off' class='loginInput' name=""  placeholder = "Concept development services if selected" id="cdServices" type="text" value= "<?php echo $cdServices; ?>" maxlength='100' size="25">
 
 <label for="mrServices">Market Research services:</label>
-<input autocomplete='off' class='loginInput' name="entry.46610600"  placeholder = "Market research services if selected" id="mrServices" type="text" value= "<?php echo $mrServices; ?>" maxlength='100' size="25">
+<input autocomplete='off' class='loginInput' name=""  placeholder = "Market research services if selected" id="mrServices" type="text" value= "<?php echo $mrServices; ?>" maxlength='100' size="25">
 
 <label for="fsServices">Feasibility study services:</label>
-<input autocomplete='off' class='loginInput' name="entry.565759541"  placeholder = "Feasibility services if selected" id="fsServices" type="text" value= "<?php echo $fsServices; ?>" maxlength='100' size="25">
+<input autocomplete='off' class='loginInput' name=""  placeholder = "Feasibility services if selected" id="fsServices" type="text" value= "<?php echo $fsServices; ?>" maxlength='100' size="25">
 
 <label for="imServices">Implementation services:</label>
-<input autocomplete='off' class='loginInput' name="entry.1539038606"  placeholder = "Implementation services if selected" id="imServices" type="text" value= "<?php echo $imServices; ?>" maxlength='100' size="25">
+<input autocomplete='off' class='loginInput' name=""  placeholder = "Implementation services if selected" id="imServices" type="text" value= "<?php echo $imServices; ?>" maxlength='100' size="25">
 
 <label for="ssServices">Support services:</label>
-<input autocomplete='off' class='loginInput' name="entry.1891477188"   placeholder = "Support services if selected" id="ssServices" type="text" value= "<?php echo $ssServices; ?>" maxlength='100' size="25">
+<input autocomplete='off' class='loginInput' name=""   placeholder = "Support services if selected" id="ssServices" type="text" value= "<?php echo $ssServices; ?>" maxlength='100' size="25">
 
 <label for="ddServices">Due diligence services:</label>
-<input autocomplete='off' class='loginInput' name="entry.1965030470"  placeholder = "Due diligence services if selected" id="ddServices" type="text" value= "<?php echo $ddServices; ?>" maxlength='100' size="25">
+<input autocomplete='off' class='loginInput' name=""  placeholder = "Due diligence services if selected" id="ddServices" type="text" value= "<?php echo $ddServices; ?>" maxlength='100' size="25">
 
 <label for="bpServices">Brand & Product development services:</label>
-<input autocomplete='off' class='loginInput' name="entry.2107714193"  placeholder = "Brand & Product development services if selected" id="bpServices" type="text" value= "<?php echo $bpServices; ?>" maxlength='100' size="25">
+<input autocomplete='off' class='loginInput' name=""  placeholder = "Brand & Product development services if selected" id="bpServices" type="text" value= "<?php echo $bpServices; ?>" maxlength='100' size="25">
 
 <label for="stServices">Sustainability services:</label>
-<input autocomplete='off' class='loginInput' name="entry.1988829652"  placeholder = "Sustainability services if selected" id="stServices" type="text" value= "<?php echo $stServices; ?>" maxlength='100' size="25">
+<input autocomplete='off' class='loginInput' name=""  placeholder = "Sustainability services if selected" id="stServices" type="text" value= "<?php echo $stServices; ?>" maxlength='100' size="25">
 
 <label for="spServices">Scenario planning services:</label>
-<input autocomplete='off' class='loginInput' name="entry.700074700"  placeholder = "Scenario planning services if selected" id="spServices" type="text" value= "<?php echo $spServices; ?>" maxlength='100' size="25">
+<input autocomplete='off' class='loginInput' name=""  placeholder = "Scenario planning services if selected" id="spServices" type="text" value= "<?php echo $spServices; ?>" maxlength='100' size="25">
 
 <label for="signPerson">Agritecture employee who signs the proposal (edit if needed):</label>
-<input autocomplete='off' class='loginInput' name="entry.677581176" placeholder = "AGR Employee who signs the proposal (on behalf of AGR)" id="signPerson" type="text" value= "<?php echo "Jeffrey Landau";  ?>" maxlength='50' size="25">
+<input autocomplete='off' class='loginInput' name="" placeholder = "AGR Employee who signs the proposal (on behalf of AGR)" id="signPerson" type="text" value= "<?php echo "Jeffrey Landau";  ?>" maxlength='50' size="25">
 
 <label for="signPersonTitle">Title of the employee who signs the proposal (edit if needed):</label>
-<input autocomplete='off' class='loginInput' name="entry.896728354" placeholder = "Title of the AGR Employee who signs the proposal (on behalf of AGR)" id="signPersonTitle" type="text" value= "<?php echo "Director of Business Development";  ?>" maxlength='50' size="25">
+<input autocomplete='off' class='loginInput' name="" placeholder = "Title of the AGR Employee who signs the proposal (on behalf of AGR)" id="signPersonTitle" type="text" value= "<?php echo "Director of Business Development";  ?>" maxlength='50' size="25">
 
 <label for="notes">Project notes:</label>
-<textarea style="height: 140px;" cols="40" placeholder = "Project notes"  name="entry.1775732000" rows="5"><?php if($valid) echo $notesStr; else echo "" ?></textarea>
+<textarea style="height: 140px;" cols="40" placeholder = "Project notes"  name="" rows="5"><?php if($valid) echo $notesStr; else echo "" ?></textarea>
 
 <label for="briefPar">Please enter project brief paragraph:</label>
 <textarea style="height: 140px;" cols="40" placeholder = "Example: Adelphi Legacy Group is a newly formed cooperative focused on urban and rural development. The Client is seeking to establish a business partnership with the Government of Forrest City, Arkansas through the creation of a large-scale commercial controlled environment agriculture (CEA) operation.
 As such, this proposal outlines Agritecture’s services related to the conceptualisation, design and feasibility of the farming operation."  
-  name="entry.413678594" rows="5"><?php echo "" ?></textarea>
+  name="" rows="5"><?php echo "" ?></textarea>
 
   <label for="goals">Please enter client goals:</label>
 <textarea style="height: 140px;" cols="40" placeholder = "Example: Increase the economic footprint of a rural area\n.
 Increase the economic impact that Arkansas has on the South.\n
 Provide job opportunities into the state.\n
 Show the value of public/private partnership.\n"
-name="entry.1595805120" rows="5"><?php echo "" ?></textarea>
+name="" rows="5"><?php echo "" ?></textarea>
 
   <label for="projLoc">Enter location for the project (city,state,country):</label>
-<input autocomplete='off' class='loginInput' name="entry.859649342" placeholder = "Example: Forrest City, Arkansas" id="projLoc" type="text" value= "<?php echo "";  ?>" maxlength='250' size="25">
+<input autocomplete='off' class='loginInput' name="" placeholder = "Example: Forrest City, Arkansas" id="projLoc" type="text" value= "<?php echo "";  ?>" maxlength='250' size="25">
 
 <label for="projLocProfile">Enter location profile:</label>
-<input autocomplete='off' class='loginInput' name="entry.419419415" placeholder = "Example: St. Francis County; Heart of I40 corridor - Prime location for transportation;
+<input autocomplete='off' class='loginInput' name="" placeholder = "Example: St. Francis County; Heart of I40 corridor - Prime location for transportation;
 93 miles northeast of Little Rock, AR; 50 miles west of Memphis, TN" id="projLocProfile" type="text" value= "<?php echo "";  ?>" maxlength='500' size="25">
 
 <label for="budget">Enter budget for the project:</label>
-<input autocomplete='off' class='loginInput' name="entry.1598738964" placeholder = "Example: $140M - $200M" id="budget" type="text" value= "<?php echo "";  ?>" maxlength='250' size="25">
+<input autocomplete='off' class='loginInput' name="" placeholder = "Example: $140M - $200M" id="budget" type="text" value= "<?php echo "";  ?>" maxlength='250' size="25">
 
 <label for="crops">Enter crops for the project:</label>
-<input autocomplete='off' class='loginInput' name="entry.557285436" placeholder = "Example: Leafy greens, Tomatoes, Peppers, Garlic, Collard Greens (tentative list)" id="crops" type="text" value= "<?php echo "";  ?>" maxlength='500' size="25">
+<input autocomplete='off' class='loginInput' name="" placeholder = "Example: Leafy greens, Tomatoes, Peppers, Garlic, Collard Greens (tentative list)" id="crops" type="text" value= "<?php echo "";  ?>" maxlength='500' size="25">
 
 <label for="opTeam">Enter operating team for the project:</label>
-<input autocomplete='off' class='loginInput' name="entry.972530107" placeholder = "Example: Will need to be recruited" id="opTeam" type="text" value= "<?php echo "";  ?>" maxlength='300' size="25">
+<input autocomplete='off' class='loginInput' name="" placeholder = "Example: Will need to be recruited" id="opTeam" type="text" value= "<?php echo "";  ?>" maxlength='300' size="25">
 
 <label for="customer">Enter Customer for the project:</label>
-<input autocomplete='off' class='loginInput' name="entry.1304263339" placeholder = "Example: B2B - Wholesale, Retail, & Institutions" id="customer" type="text" value= "<?php echo "";  ?>" maxlength='500' size="25">
+<input autocomplete='off' class='loginInput' name="" placeholder = "Example: B2B - Wholesale, Retail, & Institutions" id="customer" type="text" value= "<?php echo "";  ?>" maxlength='500' size="25">
 
 
 <input type="submit" id="notes" value="CONFIRM" class="btn btn-block btn-primary">
