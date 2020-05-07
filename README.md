@@ -1,5 +1,10 @@
 Proposal Generator for internal use. Version 1.
 
+In this project I both built and called REST API to retrieve information about clients/companies/deals and 
+displayed it in a php web form that allows the user to edit that information and connects to google docs 
+to generate a folder and proposal document in the google drive.
+This project was developed for Agritecture Consulting, a consulting firm in Brooklyn during my SWE Internship.
+
 
 I Hosting. I find heroku very suitable for hosting php webpages - in order to do that, go to heroku at 
 https://id.heroku.com/login and enter the necessary login credentials or register. 
